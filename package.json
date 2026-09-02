@@ -1,0 +1,25 @@
+{
+  "name": "@veriglow/citeanything-plugin",
+  "version": "0.1.0",
+  "description": "CiteAnything Agent Skill and MCP server",
+  "type": "module",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/veriglow/citeanything-plugin.git"
+  },
+  "bin": {
+    "citeanything-mcp": "./plugins/citeanything/mcp/server.mjs"
+  },
+  "scripts": {
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "files": [
+    "plugins/citeanything/mcp/",
+    "LICENSE",
+    "README.md"
+  ]
+}

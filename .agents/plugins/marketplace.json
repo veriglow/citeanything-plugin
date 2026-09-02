@@ -1,0 +1,20 @@
+{
+  "name": "citeanything",
+  "interface": {
+    "displayName": "CiteAnything"
+  },
+  "plugins": [
+    {
+      "name": "citeanything",
+      "source": {
+        "source": "local",
+        "path": "./plugins/citeanything"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}
