@@ -8,11 +8,11 @@
       "name": "citeanything",
       "source": {
         "source": "local",
-        "path": "./plugins/citeanything"
+        "path": "."
       },
       "policy": {
         "installation": "AVAILABLE",
-        "authentication": "ON_INSTALL"
+        "authentication": "ON_USE"
       },
       "category": "Productivity"
     }

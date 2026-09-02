@@ -1,0 +1,166 @@
+{
+  "contractVersion": "0.2.0",
+  "tools": [
+    {
+      "scope": "citation:write",
+      "name": "create_citations",
+      "description": "Create one or more replayable citations from original evidence already inspected by the agent. Equivalent retries are idempotent.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "citations": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "properties": {
+                "claim": { "type": "string", "description": "The claim supported by this citation." },
+                "source_url": { "type": "string", "description": "Exact original URL for web evidence; omit for knowledge-base evidence." },
+                "quoted_text": { "type": "string", "description": "Verbatim source excerpt, normally one to three sentences." },
+                "citation_type": { "type": "string", "enum": ["text", "table"], "default": "text" },
+                "action_steps": {
+                  "type": "array",
+                  "description": "Browser actions needed to reveal dynamic evidence; omit for static pages.",
+                  "items": { "type": "object", "additionalProperties": true }
+                },
+                "anchor": { "type": "string", "description": "Short exact text used to position a text highlight." },
+                "prefix": { "type": "string", "description": "Exact context immediately before an ambiguous anchor." },
+                "suffix": { "type": "string", "description": "Exact context immediately after an ambiguous anchor." },
+                "row_anchor": { "type": "string", "description": "Exact table row identifier." },
+                "col_anchor": { "type": "string", "description": "Exact table column header, when present." },
+                "cell_anchor": { "type": "string", "description": "Exact target table-cell value." },
+                "selection_scope": { "type": "string", "enum": ["cell", "row"], "default": "cell" },
+                "source_type": { "type": "string", "enum": ["web", "kb"], "default": "web" },
+                "kb_file": { "type": "string", "description": "Knowledge-base document stem." },
+                "page": {
+                  "description": "Knowledge-base page or chapter identifier.",
+                  "anyOf": [{ "type": "string" }, { "type": "integer" }]
+                }
+              },
+              "required": ["claim"],
+              "additionalProperties": false
+            }
+          }
+        },
+        "required": ["citations"],
+        "additionalProperties": false
+      },
+      "annotations": { "readOnlyHint": false, "destructiveHint": false, "idempotentHint": true, "openWorldHint": false }
+    },
+    {
+      "scope": "citation:read",
+      "name": "get_citation",
+      "description": "Get the evidence, verification state, replay URL, and preview state for one CiteAnything token.",
+      "inputSchema": {
+        "type": "object",
+        "properties": { "token": { "type": "string", "minLength": 1 } },
+        "required": ["token"],
+        "additionalProperties": false
+      },
+      "annotations": { "readOnlyHint": true, "destructiveHint": false, "idempotentHint": true, "openWorldHint": false }
+    },
+    {
+      "scope": "citation:read",
+      "name": "wait_for_citation_preview",
+      "description": "Wait until a citation's automatic screenshot preview is done, failed, not applicable, or needs client capture.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "token": { "type": "string", "minLength": 1 },
+          "timeout_seconds": { "type": "integer", "minimum": 0, "maximum": 180, "default": 120 },
+          "poll_interval_seconds": { "type": "number", "minimum": 0.5, "maximum": 10, "default": 2 }
+        },
+        "required": ["token"],
+        "additionalProperties": false
+      },
+      "annotations": { "readOnlyHint": true, "destructiveHint": false, "idempotentHint": true, "openWorldHint": false }
+    },
+    {
+      "scope": "kb:read",
+      "name": "list_knowledge_base",
+      "description": "List the current user's CiteAnything knowledge-base documents and processing states.",
+      "inputSchema": { "type": "object", "properties": {}, "additionalProperties": false },
+      "annotations": { "readOnlyHint": true, "destructiveHint": false, "idempotentHint": true, "openWorldHint": false }
+    },
+    {
+      "scope": "kb:read",
+      "name": "search_knowledge_base",
+      "description": "Search extracted page text across the current user's ready CiteAnything knowledge-base documents.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "query": { "type": "string", "minLength": 1, "maxLength": 500 },
+          "document_id": { "type": "integer", "minimum": 1 },
+          "limit": { "type": "integer", "minimum": 1, "maximum": 100, "default": 20 }
+        },
+        "required": ["query"],
+        "additionalProperties": false
+      },
+      "annotations": { "readOnlyHint": true, "destructiveHint": false, "idempotentHint": true, "openWorldHint": false }
+    },
+    {
+      "scope": "kb:read",
+      "name": "read_knowledge_base_page",
+      "description": "Read one extracted text page from an owned, ready CiteAnything knowledge-base document.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "document_id": { "type": "integer", "minimum": 1 },
+          "page": { "type": "integer", "minimum": 1 }
+        },
+        "required": ["document_id", "page"],
+        "additionalProperties": false
+      },
+      "annotations": { "readOnlyHint": true, "destructiveHint": false, "idempotentHint": true, "openWorldHint": false }
+    },
+    {
+      "scope": "kb:write",
+      "name": "import_pdf_to_knowledge_base",
+      "description": "Import one directly relevant public PDF into the user's private CiteAnything knowledge base. This is not a general page-fetch tool.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "url": { "type": "string", "description": "Public HTTP(S) URL that resolves to a PDF." },
+          "display_name": { "type": "string", "description": "Optional human-readable document name." }
+        },
+        "required": ["url"],
+        "additionalProperties": false
+      },
+      "annotations": { "readOnlyHint": false, "destructiveHint": false, "idempotentHint": true, "openWorldHint": true }
+    },
+    {
+      "scope": "kb:read",
+      "name": "wait_for_knowledge_base_document",
+      "description": "Wait for an imported CiteAnything knowledge-base document to become ready or fail.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "document_id": { "type": "integer", "minimum": 1 },
+          "timeout_seconds": { "type": "integer", "minimum": 0, "maximum": 600, "default": 600 },
+          "poll_interval_seconds": { "type": "number", "minimum": 0.5, "maximum": 15, "default": 3 }
+        },
+        "required": ["document_id"],
+        "additionalProperties": false
+      },
+      "annotations": { "readOnlyHint": true, "destructiveHint": false, "idempotentHint": true, "openWorldHint": false }
+    },
+    {
+      "scope": "article:write",
+      "name": "publish_article",
+      "description": "Publish or save a Markdown article containing already-created [@ev:TOKEN] citations.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "title": { "type": "string", "minLength": 1 },
+          "body": { "type": "string", "minLength": 1, "description": "Markdown body with verified CiteAnything markers." },
+          "summary": { "type": "string" },
+          "cover_image": { "type": "string" },
+          "status": { "type": "string", "enum": ["draft", "published"], "default": "published" }
+        },
+        "required": ["title", "body"],
+        "additionalProperties": false
+      },
+      "annotations": { "readOnlyHint": false, "destructiveHint": false, "idempotentHint": false, "openWorldHint": false }
+    }
+  ]
+}

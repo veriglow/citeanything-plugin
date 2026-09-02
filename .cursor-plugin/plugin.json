@@ -1,20 +1,21 @@
 {
   "name": "citeanything",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Create replayable evidence citations and cite private knowledge-base documents from AI agents.",
   "author": {
     "name": "VeriGlow",
     "url": "https://citeanything.app"
   },
-  "homepage": "https://citeanything.app/docs/mcp-cli-and-agent-skill",
+  "homepage": "https://citeanything.app/plugin",
   "repository": "https://github.com/veriglow/citeanything-plugin",
   "license": "MIT",
-  "keywords": ["citations", "evidence", "research", "knowledge-base", "mcp"],
+  "keywords": [
+    "citations",
+    "evidence",
+    "research",
+    "knowledge-base",
+    "mcp"
+  ],
   "skills": "./skills/",
-  "mcpServers": {
-    "citeanything": {
-      "command": "node",
-      "args": ["${CLAUDE_PLUGIN_ROOT}/mcp/server.mjs"]
-    }
-  }
+  "mcpServers": "./mcp.json"
 }

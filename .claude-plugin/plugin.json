@@ -19,15 +19,8 @@
   "skills": "./skills/",
   "mcpServers": {
     "citeanything": {
-      "type": "streamable-http",
+      "type": "http",
       "url": "https://citeanything.app/mcp"
     }
-  },
-  "interface": {
-    "displayName": "CiteAnything",
-    "shortDescription": "Turn inspected evidence into replayable citations",
-    "longDescription": "Use the host agent's own web tools to inspect original sources, then create replayable CiteAnything citations, cite private knowledge-base documents, and publish cited articles.",
-    "developerName": "VeriGlow",
-    "websiteURL": "https://citeanything.app/plugin"
   }
 }

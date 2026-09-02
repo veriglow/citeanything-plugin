@@ -1,7 +1,12 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 
-import { handleMessage, TOOLS } from "../plugins/citeanything/mcp/server.mjs";
+import {
+  handleMessage,
+  TOOL_CONTRACT,
+  TOOL_SCOPES,
+  TOOLS,
+} from "../compatibility/stdio/server.mjs";
 
 test("publishes the agreed public tool profile without general web tools", () => {
   assert.deepEqual(
@@ -19,6 +24,11 @@ test("publishes the agreed public tool profile without general web tools", () =>
     ],
   );
   assert.equal(TOOLS.some((tool) => ["search_web", "fetch_url", "open", "click", "find"].includes(tool.name)), false);
+  assert.equal(TOOL_CONTRACT.contractVersion, "0.2.0");
+  assert.deepEqual(
+    Object.keys(TOOL_SCOPES).sort(),
+    TOOLS.map((tool) => tool.name).sort(),
+  );
 });
 
 test("implements MCP initialize and tools/list", async () => {

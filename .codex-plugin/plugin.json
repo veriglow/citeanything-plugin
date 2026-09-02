@@ -1,12 +1,12 @@
 {
   "name": "citeanything",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Create replayable evidence citations and cite private knowledge-base documents from AI agents.",
   "author": {
     "name": "VeriGlow",
     "url": "https://citeanything.app"
   },
-  "homepage": "https://citeanything.app/docs/mcp-cli-and-agent-skill",
+  "homepage": "https://citeanything.app/plugin",
   "repository": "https://github.com/veriglow/citeanything-plugin",
   "license": "MIT",
   "keywords": [
@@ -19,29 +19,27 @@
   "skills": "./skills/",
   "mcpServers": {
     "citeanything": {
-      "command": "node",
-      "args": ["./mcp/server.mjs"],
-      "cwd": ".",
-      "env_vars": ["CITEANYTHING_API_KEY", "CITEANYTHING_BASE_URL"]
+      "type": "http",
+      "url": "https://citeanything.app/mcp"
     }
   },
   "interface": {
     "displayName": "CiteAnything",
     "shortDescription": "Turn inspected evidence into replayable citations",
-    "longDescription": "Use the host agent's own web tools to inspect original sources, then create replayable CiteAnything citations with automatic preview screenshots. Search and cite private knowledge-base documents and publish cited articles without adding another web-search provider.",
+    "longDescription": "Use the host agent's own web tools to inspect original sources, then create replayable CiteAnything citations, cite private knowledge-base documents, and publish cited articles.",
     "developerName": "VeriGlow",
     "category": "Productivity",
     "capabilities": [
       "Interactive",
       "Write"
     ],
-    "websiteURL": "https://citeanything.app",
+    "websiteURL": "https://citeanything.app/plugin",
     "privacyPolicyURL": "https://citeanything.app/privacy",
     "termsOfServiceURL": "https://citeanything.app/terms",
     "defaultPrompt": [
-      "Research this question and make every important factual claim verifiable with CiteAnything",
-      "Create replayable citations for the evidence I already inspected",
-      "Search my CiteAnything knowledge base and answer with exact cited evidence"
+      "Research this question and cite every important factual claim",
+      "Create replayable citations for the evidence I inspected",
+      "Search my CiteAnything knowledge base and cite exact evidence"
     ],
     "brandColor": "#10B981"
   }

@@ -1,13 +1,13 @@
 #!/usr/bin/env node
 
 import { lookup } from "node:dns/promises";
-import { realpathSync } from "node:fs";
+import { readFileSync, realpathSync } from "node:fs";
 import { isIP } from "node:net";
 import { basename } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const SERVER_NAME = "citeanything";
-const SERVER_VERSION = "0.1.0";
+const SERVER_VERSION = "0.2.0";
 const DEFAULT_BASE_URL = "https://citeanything.app";
 const MAX_PDF_BYTES = 100 * 1024 * 1024;
 
@@ -42,7 +42,7 @@ const citationProperties = {
   },
 };
 
-export const TOOLS = [
+const LEGACY_TOOL_SNAPSHOT = [
   {
     name: "create_citations",
     description: "Create one or more replayable citations from original evidence already inspected by the agent. Equivalent retries are idempotent.",
@@ -173,6 +173,18 @@ export const TOOLS = [
     annotations: { readOnlyHint: false, destructiveHint: false, idempotentHint: false, openWorldHint: false },
   },
 ];
+
+export const TOOL_CONTRACT = JSON.parse(
+  readFileSync(new URL("../../contracts/tools.json", import.meta.url), "utf8"),
+);
+export const TOOL_SCOPES = Object.fromEntries(
+  TOOL_CONTRACT.tools.map((tool) => [tool.name, tool.scope]),
+);
+export const TOOLS = TOOL_CONTRACT.tools.map(({ scope: _scope, ...tool }) => tool);
+
+if (JSON.stringify(TOOLS) !== JSON.stringify(LEGACY_TOOL_SNAPSHOT)) {
+  throw new Error("contracts/tools.json drifted from the v0.1 stdio compatibility profile");
+}
 
 function baseUrl() {
   return (process.env.CITEANYTHING_BASE_URL || DEFAULT_BASE_URL).replace(/\/+$/, "");

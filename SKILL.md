@@ -12,7 +12,7 @@ Turn evidence already inspected by the agent into citations that readers can reo
 - Use the host's own search, browser, or web tools to discover and inspect public sources.
 - Search-result snippets are discovery aids, not evidence. Open the original source before citing it.
 - CiteAnything tools create and retrieve citations, manage CiteAnything knowledge-base evidence, and publish cited articles. They do not provide general web search or page fetching.
-- Never print, store in an artifact, or commit `CITEANYTHING_API_KEY`.
+- Authentication is completed through the host's MCP browser sign-in flow. Never ask the user to paste a bearer token, authorization code, refresh token, or Skill Key into a prompt or artifact.
 
 ## Web evidence
 
@@ -31,7 +31,7 @@ For ordinary prose use `citation_type: "text"`, an exact short `anchor`, and a l
 3. Call `read_knowledge_base_page` and copy exact evidence from the full page text.
 4. Call `create_citations` with `source_type: "kb"`, the returned `stem` as `kb_file`, and the actual page number. Omit `source_url`.
 
-Use `import_pdf_to_knowledge_base` only for a directly relevant, lawful public PDF worth retaining. It imports the PDF but does not expose a general network-fetch capability. Wait with `wait_for_knowledge_base_document`, then read the relevant page before citing it.
+Use `import_pdf_to_knowledge_base` only for a directly relevant, lawful public PDF worth retaining. It imports the PDF but does not expose a general network-fetch capability. Pass its returned `doc_id` as `document_id` to `wait_for_knowledge_base_document`, then read the relevant page before citing it.
 
 ## Output contract
 

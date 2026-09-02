@@ -1,0 +1,20 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "citeanything",
+  "version": "0.2.0",
+  "description": "Create replayable evidence citations and cite private knowledge-base documents from AI agents.",
+  "author": {
+    "name": "VeriGlow",
+    "url": "https://citeanything.app"
+  },
+  "homepage": "https://citeanything.app/plugin",
+  "repository": "https://github.com/veriglow/citeanything-plugin",
+  "license": "MIT",
+  "keywords": [
+    "citations",
+    "evidence",
+    "research",
+    "knowledge-base",
+    "mcp"
+  ]
+}

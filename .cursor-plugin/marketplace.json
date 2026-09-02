@@ -1,22 +1,32 @@
 {
   "name": "citeanything",
-  "owner": { "name": "VeriGlow" },
+  "owner": {
+    "name": "VeriGlow"
+  },
   "metadata": {
     "description": "CiteAnything plugins for verifiable AI-generated research",
-    "version": "0.1.0"
+    "version": "0.2.0"
   },
   "plugins": [
     {
       "name": "citeanything",
-      "source": "plugins/citeanything",
+      "source": ".",
       "description": "Create replayable evidence citations and cite private knowledge-base documents from AI agents.",
-      "version": "0.1.0",
-      "author": { "name": "VeriGlow" },
-      "homepage": "https://citeanything.app/docs/mcp-cli-and-agent-skill",
+      "version": "0.2.0",
+      "author": {
+        "name": "VeriGlow",
+        "url": "https://citeanything.app"
+      },
+      "homepage": "https://citeanything.app/plugin",
       "repository": "https://github.com/veriglow/citeanything-plugin",
       "license": "MIT",
       "category": "Productivity",
-      "tags": ["citations", "evidence", "research", "mcp"]
+      "tags": [
+        "citations",
+        "evidence",
+        "research",
+        "mcp"
+      ]
     }
   ]
 }
