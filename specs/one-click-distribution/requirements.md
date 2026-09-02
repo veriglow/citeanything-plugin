@@ -13,11 +13,15 @@ A user shall be able to install CiteAnything once, start or reload a supported a
 interactively on first use, and use the complete Skill + MCP capability without editing JSON,
 copying files, or exporting an API key.
 
-The primary installation command shall be:
+The first verified installation command, for Codex, shall be:
 
 ```bash
-npx plugins add veriglow/citeanything-plugin
+codex plugin marketplace add veriglow/citeanything-plugin --ref main && codex plugin add citeanything@citeanything
 ```
+
+`npx plugins add veriglow/citeanything-plugin` remains the intended portable installer entry point,
+but it shall not be advertised as activating a host until that host's native plugin and MCP views
+confirm the installation.
 
 ## User Stories
 
@@ -31,10 +35,12 @@ npx plugins add veriglow/citeanything-plugin
 
 ## Functional Requirements
 
-### R1 — One-command installation
+### R1 — One-command host installation
 
-- When a user runs `npx plugins add veriglow/citeanything-plugin`, the installer shall discover one
-  CiteAnything plugin containing at least one Skill and one MCP server.
+- Codex shall install the public GitHub plugin with one shell line using its native marketplace and
+  plugin commands, yielding one Skill and one MCP server.
+- When a user runs `npx plugins add veriglow/citeanything-plugin`, the portable installer shall
+  discover one CiteAnything package containing at least one Skill and one MCP server.
 - When supported agents are detected, the installer shall offer or perform installation through
   their native plugin mechanisms without requiring the user to locate plugin files manually.
 - When a target is specified with `--target`, installation shall affect only that target.
@@ -75,8 +81,7 @@ npx plugins add veriglow/citeanything-plugin
 
 - Codex, Claude Code, Cursor, and Kimi Code shall receive the same Skill content, MCP tool names,
   input schemas, and API semantics.
-- When installed through a host-native marketplace path, the resulting capabilities shall match the
-  one-command installation path.
+- Every activated host-native installation shall expose the same resulting capabilities.
 - Host-specific configuration shall be generated from or checked against canonical sources to
   prevent drift.
 
@@ -96,14 +101,16 @@ npx plugins add veriglow/citeanything-plugin
 - The GitHub repository shall remain an installable source of truth.
 - CiteAnything shall publish a stable first-party web entry that identifies the Plugin, Skill, MCP
   endpoint or transport, current install command, supported agents, and authentication behavior.
-- The README shall lead with the one-command installation, user-visible capabilities, supported
-  agents, and first-use login; host-specific steps shall be secondary fallbacks.
+- The README shall lead with the verified Codex one-line installation, user-visible capabilities,
+  supported agents, and first-use login; unverified portable and host-specific steps shall be
+  labeled accurately.
 - Standalone Skill and MCP instructions shall remain available for hosts that do not support full
   plugins.
 
 ### R8 — Verification and release gate
 
-- `npx plugins discover veriglow/citeanything-plugin` shall report both the Skill and MCP server.
+- `npx plugins discover veriglow/citeanything-plugin` shall report both the Skill and MCP server;
+  discovery alone shall not count as host activation.
 - Automated tests shall assert the exact nine-tool public profile and absence of general web tools.
 - Installation shall be smoke-tested in isolated user or project scopes for every locally testable
   supported host.

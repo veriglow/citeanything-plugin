@@ -309,10 +309,10 @@ installation compatibility or marketplace presence.
 
 | Host | Preferred installation | Runtime | Adapter policy |
 | --- | --- | --- | --- |
-| Codex app/CLI | `npx plugins add` or native plugin marketplace | Remote MCP OAuth | Generated manifest if native format requires one |
-| Claude Code | `npx plugins add` or Claude marketplace | Remote MCP OAuth | Generated `.claude-plugin` metadata only |
-| Cursor | `npx plugins add` or Cursor marketplace | Remote MCP OAuth | Generated `.cursor-plugin` metadata only |
-| Kimi Code CLI | `npx plugins add` where detected; documented native fallback | Remote MCP OAuth when supported | Generated Kimi adapter; explicit limitation if remote OAuth is unavailable |
+| Codex app/CLI | Verified native marketplace one-liner; `npx plugins add` remains a candidate | Remote MCP OAuth | Generated manifest if native format requires one |
+| Claude Code | Native HTTP MCP fallback; plugin/OAuth verification pending | Remote MCP OAuth | Generated `.claude-plugin` metadata only |
+| Cursor | Native marketplace install; OAuth verification pending | Remote MCP OAuth | Generated `.cursor-plugin` metadata only |
+| Kimi Code CLI | Verified native MCP fallback; portable plugin activation pending | Remote MCP OAuth | Generated Kimi adapter; explicit limitation if remote OAuth is unavailable |
 
 The installer discovery gate is authoritative: success requires it to report both the Skill and MCP
 server. A host that can install only the Skill is labeled “Skill-only,” not “Plugin installed.”
@@ -431,9 +431,9 @@ flows intact. Existing v0.1 users keep their manual stdio path until they choose
 
 ### End-to-end release gate
 
-On a clean test profile with no `CITEANYTHING_API_KEY`:
+On a clean Codex test profile with no `CITEANYTHING_API_KEY`:
 
-1. run `npx plugins add veriglow/citeanything-plugin`;
+1. run `codex plugin marketplace add veriglow/citeanything-plugin --ref main && codex plugin add citeanything@citeanything`;
 2. confirm the host sees the Skill and one MCP server;
 3. invoke `list_knowledge_base`;
 4. complete browser login and consent;
@@ -442,7 +442,8 @@ On a clean test profile with no `CITEANYTHING_API_KEY`:
 7. restart the host and confirm secure refresh without another manual secret step;
 8. revoke the connection and confirm the next protected call requires authorization.
 
-The release remains a candidate until this path passes on each host advertised as fully supported.
+For each additional host, repeat the lifecycle through that host's native installation path. The
+release remains a candidate until this path passes on every host advertised as fully supported.
 
 ## Repository and Product Changes
 

@@ -153,8 +153,9 @@
   - _Requirements: R3, R7_
 
 - [x] 13. Rewrite installation and lifecycle documentation around verified behavior
-  - Lead the README with `npx plugins add veriglow/citeanything-plugin`, capabilities, supported
-    hosts, and first-use browser login.
+  - Lead the README with the verified Codex public-marketplace one-liner, capabilities, supported
+    hosts, and first-use browser login; retain `npx plugins add` as a portable candidate until its
+    Codex activation path is fixed upstream.
   - Document user/project scopes, update, uninstall, revocation, and clean troubleshooting.
   - Move native installation, standalone Skill, direct remote MCP, and Skill Key stdio instructions
     into clearly labeled fallback sections.

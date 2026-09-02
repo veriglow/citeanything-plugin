@@ -15,20 +15,24 @@
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue?style=flat-square" alt="MIT License" /></a>
 </p>
 
-## Install
+## Install in Codex
+
+```bash
+codex plugin marketplace add veriglow/citeanything-plugin --ref main && codex plugin add citeanything@citeanything
+```
+
+This is the verified public-GitHub path for Codex CLI 0.152.0. It installs one Agent Skill plus one
+remote MCP server. On the first protected tool call, Codex opens `citeanything.app` in your browser.
+Log in, review the five permissions, and approve the connection. No Skill Key, environment variable,
+copied authorization code, or hand-edited MCP JSON is required.
+
+The portable installer still discovers the complete package, but `plugins@1.3.4` does not finish
+Codex 0.152.0's native installation registration. Until that upstream gap closes, treat this as a
+package-discovery and host-candidate path rather than the verified Codex install command:
 
 ```bash
 npx plugins add veriglow/citeanything-plugin
 ```
-
-The installer detects supported agents and installs one Agent Skill plus one remote MCP server.
-Codex is the first end-to-end verified host; select it explicitly with `--target codex` when several
-agents are installed. The default scope is your user account; `--scope project` is host-dependent
-and may still use a user-level plugin cache.
-
-On the first protected tool call, the host opens `citeanything.app` in your browser. Log in, review
-the five permissions, and approve the connection. Normal installation requires no Skill Key,
-environment variable, copied authorization code, or hand-edited MCP JSON.
 
 ## What agents receive
 
@@ -62,7 +66,7 @@ every host the same way.
 
 | Host tested 2026-09-02 | Result |
 | --- | --- |
-| Codex CLI 0.152.0 | `npx` install, browser OAuth, nine-tool discovery, private read call, and a fresh-process credential reuse passed |
+| Codex CLI 0.152.0 | Native public-marketplace install, browser OAuth, nine-tool discovery, private read call, and fresh-process credential reuse passed |
 | Kimi Code CLI 1.9.0 | Native MCP OAuth and nine-tool discovery passed; `plugins@1.3.4` installs to an inactive plugin path, so use the native fallback below |
 | Cursor Agent 2026.08.31 | Native marketplace install and runtime `needsAuth` detection passed; OAuth remains pending because the test machine has no Cursor IDE |
 | Claude Code 2.1.229 | Native HTTP MCP registration passed; OAuth/tool execution remains pending because the installed CLI's account/network probe did not complete |
@@ -91,6 +95,8 @@ These are fallbacks for hosts that cannot install a complete Agent Plugin:
 - **Claude Code 2.1.229:** `claude mcp add --scope user --transport http citeanything https://citeanything.app/mcp`
 - **Kimi Code CLI 1.9.0:** `kimi mcp add --transport http --auth oauth citeanything https://citeanything.app/mcp`, then `kimi mcp auth citeanything`
 - **Cursor Agent 2026.08.31:** run `agent plugin marketplace add https://github.com/veriglow/citeanything-plugin.git`, then open `/plugin`, paste the repository URL, and install for your user. Authenticate the detected MCP server in Cursor's MCP settings.
+- **Portable installer candidate:** `npx plugins add veriglow/citeanything-plugin`; verify activation
+  in the host's native plugin and MCP views after installation.
 - **Legacy stdio:** run the compatibility server in [`compatibility/stdio`](compatibility/stdio) with
   a scoped Skill Key. This manual path exists for older clients and is not the primary v0.2 flow.
 
