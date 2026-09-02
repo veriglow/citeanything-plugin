@@ -21,9 +21,10 @@
 npx plugins add veriglow/citeanything-plugin
 ```
 
-The installer detects supported agents and installs one Agent Skill plus one remote MCP server. The
-default scope is your user account; use `--scope project` when you deliberately want a project-local
-installation. Select one host explicitly with `--target`.
+The installer detects supported agents and installs one Agent Skill plus one remote MCP server.
+Codex is the first end-to-end verified host; select it explicitly with `--target codex` when several
+agents are installed. The default scope is your user account; `--scope project` is host-dependent
+and may still use a user-level plugin cache.
 
 On the first protected tool call, the host opens `citeanything.app` in your browser. Log in, review
 the five permissions, and approve the connection. Normal installation requires no Skill Key,
@@ -56,12 +57,19 @@ original source; use CiteAnything after the evidence is known.
 ## Host status
 
 The package includes generated adapters for Codex, Claude Code, Cursor, and Kimi Code. Agent Plugin
-discovery finds both the Skill and remote MCP contribution. A host is listed as fully supported on
-the [Plugin page](https://citeanything.app/plugin) only after a clean install, browser OAuth, tool
-call, restart/refresh, uninstall, and revocation have all passed on a dated host version.
+discovery finds both the Skill and remote MCP contribution, but current installers do not activate
+every host the same way.
 
-Until those v0.2 interoperability checks are published, treat each adapter as a release candidate
-rather than a compatibility promise.
+| Host tested 2026-09-02 | Result |
+| --- | --- |
+| Codex CLI 0.152.0 | `npx` install, browser OAuth, nine-tool discovery, private read call, and a fresh-process credential reuse passed |
+| Kimi Code CLI 1.9.0 | Native MCP OAuth and nine-tool discovery passed; `plugins@1.3.4` installs to an inactive plugin path, so use the native fallback below |
+| Cursor Agent 2026.08.31 | Native marketplace install and runtime `needsAuth` detection passed; OAuth remains pending because the test machine has no Cursor IDE |
+| Claude Code 2.1.229 | Native HTTP MCP registration passed; OAuth/tool execution remains pending because the installed CLI's account/network probe did not complete |
+
+The detailed, redacted evidence is in
+[`compatibility/2026-09-02.md`](compatibility/2026-09-02.md). A host becomes fully verified only after
+install, browser OAuth, tool execution, restart, refresh, uninstall, and server-side revocation pass.
 
 ## Update, uninstall, and revoke
 
@@ -80,6 +88,9 @@ These are fallbacks for hosts that cannot install a complete Agent Plugin:
   fetch the released Skill from <https://citeanything.app/SKILL.md>.
 - **Direct remote MCP:** configure `https://citeanything.app/mcp` as a Streamable HTTP MCP server.
   The client must support MCP OAuth discovery and PKCE.
+- **Claude Code 2.1.229:** `claude mcp add --scope user --transport http citeanything https://citeanything.app/mcp`
+- **Kimi Code CLI 1.9.0:** `kimi mcp add --transport http --auth oauth citeanything https://citeanything.app/mcp`, then `kimi mcp auth citeanything`
+- **Cursor Agent 2026.08.31:** run `agent plugin marketplace add https://github.com/veriglow/citeanything-plugin.git`, then open `/plugin`, paste the repository URL, and install for your user. Authenticate the detected MCP server in Cursor's MCP settings.
 - **Legacy stdio:** run the compatibility server in [`compatibility/stdio`](compatibility/stdio) with
   a scoped Skill Key. This manual path exists for older clients and is not the primary v0.2 flow.
 

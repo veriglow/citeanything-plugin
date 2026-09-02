@@ -48,7 +48,7 @@
 
 ## Milestone B: Add standards-based MCP OAuth to the international server
 
-- [ ] 5. Add OAuth persistence and shared security primitives
+- [x] 5. Add OAuth persistence and shared security primitives
   - Add `McpOAuthClient`, `McpAuthorizationGrant`, and `McpSession` schemas with safe additive
     migrations, ownership/index constraints, expiry, revocation, and token-family state.
   - Store authorization codes and refresh tokens only as hashes; never persist access tokens.
@@ -60,7 +60,7 @@
     overwriting unrelated edits.
   - _Requirements: R4, R6, R8; Security Requirements_
 
-- [ ] 6. Implement OAuth and MCP discovery endpoints
+- [x] 6. Implement OAuth and MCP discovery endpoints
   - Serve RFC 9728 Protected Resource Metadata for `https://citeanything.app/mcp`.
   - Serve RFC 8414 Authorization Server Metadata with PKCE S256, scopes, resource indicators,
     token, registration, and revocation capabilities.
@@ -74,7 +74,7 @@
     and malformed requests.
   - _Requirements: R4, R5, R8; Security Requirements_
 
-- [ ] 7. Implement browser authorization, tokens, refresh, and revocation
+- [x] 7. Implement browser authorization, tokens, refresh, and revocation
   - Add authorization-code consent flow using the existing international-site account session and
     mandatory PKCE S256.
   - Bind each code to user, public client, exact redirect URI, MCP resource, granted scopes, and
@@ -101,7 +101,7 @@
   - Update specs and inventory entries for each new Function or Schema object.
   - _Requirements: R3, R4, R5, R8_
 
-- [ ] 9. Mount the Streamable HTTP MCP resource server
+- [x] 9. Mount the Streamable HTTP MCP resource server
   - Add the official Python MCP SDK and mount its application at `/mcp` within the existing FastAPI
     lifespan.
   - Configure stateless JSON operation where the validated SDK/deployment combination supports it.
@@ -113,7 +113,7 @@
     request IDs, and non-secret audit records.
   - _Requirements: R2, R3, R4, R5, R8_
 
-- [ ] 10. Implement and verify all nine remote tool handlers
+- [x] 10. Implement and verify all nine remote tool handlers
   - Add `create_citations`, `get_citation`, and `wait_for_citation_preview` with existing citation
     idempotency and ownership behavior.
   - Add `list_knowledge_base`, `search_knowledge_base`, `read_knowledge_base_page`, and
@@ -128,7 +128,7 @@
 
 ## Milestone D: Complete first-use UX and public discovery
 
-- [ ] 11. Add international-site OAuth consent and connection management
+- [x] 11. Add international-site OAuth consent and connection management
   - Add a browser approval page that names the requesting client, protected resource, and each
     requested scope in plain language.
   - Preserve the authorization request through account sign-in without weakening state, redirect,
@@ -139,7 +139,7 @@
   - Add accessibility, authentication, cross-user, and browser-flow tests.
   - _Requirements: R4, R6, R7, R8_
 
-- [ ] 12. Publish the stable first-party Plugin and Skill entry points
+- [x] 12. Publish the stable first-party Plugin and Skill entry points
   - Add `https://citeanything.app/plugin` with install command, repository, current released version,
     exact tool list, no-web-search boundary, host matrix, OAuth scopes, update/uninstall/revoke paths,
     fallbacks, and last verification date.
