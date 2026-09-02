@@ -1,5 +1,4 @@
 {
-  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "citeanything",
   "version": "0.2.0",
   "description": "Create replayable evidence citations and cite private knowledge-base documents from AI agents.",
@@ -16,5 +15,7 @@
     "research",
     "knowledge-base",
     "mcp"
-  ]
+  ],
+  "skills": "./skills/",
+  "mcpServers": "./agents/open-plugin/.mcp.json"
 }

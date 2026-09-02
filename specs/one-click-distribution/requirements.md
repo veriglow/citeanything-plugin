@@ -52,6 +52,8 @@ confirm the installation.
 - The plugin shall expose its MCP server through a conforming root `mcp.json`.
 - Vendor-specific manifests may remain as adapters, but they shall not define a different public
   tool contract or different Skill behavior.
+- Agent Plugins root files and generated host companions shall remain distinct when their schemas
+  or transport spellings differ; parity means equivalent behavior, not byte-identical files.
 
 ### R3 — Complete public capability
 
@@ -84,6 +86,8 @@ confirm the installation.
 - Every activated host-native installation shall expose the same resulting capabilities.
 - Host-specific configuration shall be generated from or checked against canonical sources to
   prevent drift.
+- Vercel Labs' `plugins` CLI shall be treated as one distribution adapter, not as the owner of the
+  canonical package format.
 
 ### R6 — Installation scopes and lifecycle
 

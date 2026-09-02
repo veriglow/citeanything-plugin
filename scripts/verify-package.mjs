@@ -18,8 +18,18 @@ const contractText = await readText("contracts/tools.json");
 const contract = JSON.parse(contractText);
 const packageJson = await readJson("package.json");
 
-assert.deepEqual(manifestMirror, manifest, ".plugin/plugin.json must mirror plugin.json");
-assert.deepEqual(mcpMirror, mcp, ".mcp.json must mirror mcp.json");
+assert.deepEqual(manifestMirror, {
+  name: manifest.name,
+  version: manifest.version,
+  description: manifest.description,
+  author: manifest.author,
+  homepage: manifest.homepage,
+  repository: manifest.repository,
+  license: manifest.license,
+  keywords: manifest.keywords,
+  skills: "./skills/",
+  mcpServers: "./agents/open-plugin/.mcp.json",
+});
 assert.equal(
   manifest.$schema,
   "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
@@ -92,6 +102,32 @@ for (const path of [
   assert.equal(adapter.version, manifest.version, `${path} version drifted`);
   assert.equal(JSON.stringify(adapter), JSON.stringify(adapter).replaceAll("CITEANYTHING_API_KEY", ""));
 }
+
+const httpServer = {
+  type: "http",
+  url: "https://citeanything.app/mcp",
+};
+assert.deepEqual(mcpMirror, {
+  mcpServers: { citeanything: httpServer },
+});
+assert.deepEqual(await readJson("agents/open-plugin/.mcp.json"), {
+  mcpServers: { citeanything: httpServer },
+});
+assert.deepEqual(await readJson("agents/claude/.mcp.json"), {
+  mcpServers: { citeanything: httpServer },
+});
+assert.deepEqual(await readJson("agents/cursor/mcp.json"), {
+  citeanything: httpServer,
+});
+
+const codexAdapter = await readJson(".codex-plugin/plugin.json");
+const claudeAdapter = await readJson(".claude-plugin/plugin.json");
+const cursorAdapter = await readJson(".cursor-plugin/plugin.json");
+const kimiAdapter = await readJson(".kimi-plugin/plugin.json");
+assert.equal(codexAdapter.mcpServers, "./.mcp.json");
+assert.equal(claudeAdapter.mcpServers, "./agents/claude/.mcp.json");
+assert.equal(cursorAdapter.mcpServers, "./agents/cursor/mcp.json");
+assert.deepEqual(kimiAdapter.mcpServers, { citeanything: httpServer });
 
 console.log(
   `Verified CiteAnything Agent Plugin ${manifest.version}: ${contract.tools.length} tools, contract sha256 ${expectedHash.slice(0, 12)}…`,

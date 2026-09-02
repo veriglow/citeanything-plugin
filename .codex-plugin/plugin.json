@@ -17,12 +17,7 @@
     "mcp"
   ],
   "skills": "./skills/",
-  "mcpServers": {
-    "citeanything": {
-      "type": "http",
-      "url": "https://citeanything.app/mcp"
-    }
-  },
+  "mcpServers": "./.mcp.json",
   "interface": {
     "displayName": "CiteAnything",
     "shortDescription": "Turn inspected evidence into replayable citations",

@@ -19,7 +19,7 @@
   "skills": "./skills/",
   "mcpServers": {
     "citeanything": {
-      "type": "streamable-http",
+      "type": "http",
       "url": "https://citeanything.app/mcp"
     }
   },

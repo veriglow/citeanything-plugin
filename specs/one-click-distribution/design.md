@@ -69,11 +69,16 @@ citeanything-plugin/
 │       └── SKILL.md
 ├── contracts/
 │   └── tools.json
-├── adapters/
-│   ├── claude/
-│   ├── codex/
-│   ├── cursor/
-│   └── kimi/
+├── .plugin/
+├── .codex-plugin/
+├── .claude-plugin/
+├── .cursor-plugin/
+├── .kimi-plugin/
+├── .mcp.json
+├── agents/
+│   ├── open-plugin/.mcp.json
+│   ├── claude/.mcp.json
+│   └── cursor/mcp.json
 ├── compatibility/
 │   └── stdio/
 │       └── server.mjs
@@ -87,8 +92,8 @@ citeanything-plugin/
 ```
 
 `plugin.json`, `mcp.json`, and `skills/` occupy the standard root locations required by Agent
-Plugins 1.0. The existing nested host manifests will become generated compatibility adapters rather
-than independent sources of truth.
+Plugins 1.0. Generated compatibility adapters translate those canonical sources into each host's
+accepted syntax rather than becoming independent sources of truth.
 
 ### Root plugin manifest
 
@@ -113,6 +118,14 @@ The portable manifest contains one remote server:
 
 No `env` block or API key placeholder is present. Clients that implement MCP authorization discover
 the authorization server from the resource server response.
+
+The canonical `mcp.json` retains the Agent Plugins schema and its `streamable-http` transport name.
+Generated companion files omit that schema where a host rejects unknown fields and use the host's
+accepted spelling, such as `http`, or Cursor's bare server map. This is semantic parity, not a
+byte-for-byte copy requirement.
+
+The generated `.plugin/plugin.json` is the Open Plugin input adapter consumed by Vercel Labs'
+`plugins` CLI. That CLI is a distribution implementation, not the canonical package specification.
 
 ### Canonical Skill
 
@@ -312,7 +325,7 @@ installation compatibility or marketplace presence.
 | Codex app/CLI | Verified native marketplace one-liner; `npx plugins add` remains a candidate | Remote MCP OAuth | Generated manifest if native format requires one |
 | Claude Code | Native HTTP MCP fallback; plugin/OAuth verification pending | Remote MCP OAuth | Generated `.claude-plugin` metadata only |
 | Cursor | Native marketplace install; OAuth verification pending | Remote MCP OAuth | Generated `.cursor-plugin` metadata only |
-| Kimi Code CLI | Verified native MCP fallback; portable plugin activation pending | Remote MCP OAuth | Generated Kimi adapter; explicit limitation if remote OAuth is unavailable |
+| Kimi Code CLI | Managed plugin-store registration passes; combined agent-runtime verification pending; native MCP fallback verified | Remote MCP OAuth | Generated inline HTTP adapter; retain the native fallback until the complete runtime path passes |
 
 The installer discovery gate is authoritative: success requires it to report both the Skill and MCP
 server. A host that can install only the Skill is labeled “Skill-only,” not “Plugin installed.”

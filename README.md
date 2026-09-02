@@ -58,6 +58,17 @@ CiteAnything deliberately does not provide general web search, open, click, find
 automation, or arbitrary page-fetching tools. Use your host agent's own web tools to inspect the
 original source; use CiteAnything after the evidence is known.
 
+## Package layers
+
+- `plugin.json`, `mcp.json`, and `skills/` are the canonical, vendor-neutral Agent Plugins 1.0
+  package.
+- `.plugin/` is a generated Open Plugin input adapter for the Vercel Labs `plugins` CLI.
+- `.codex-plugin/`, `.claude-plugin/`, `.cursor-plugin/`, `.kimi-plugin/`, `.mcp.json`, and
+  `agents/*` are generated host adapters. Their syntax differs, but their endpoint, Skill, and tool
+  contract are identical.
+- The `plugins` CLI is one distribution adapter. It neither defines nor owns CiteAnything's
+  canonical plugin format.
+
 ## Host status
 
 The package includes generated adapters for Codex, Claude Code, Cursor, and Kimi Code. Agent Plugin
@@ -67,7 +78,7 @@ every host the same way.
 | Host tested 2026-09-02 | Result |
 | --- | --- |
 | Codex CLI 0.152.0 | Native public-marketplace install, browser OAuth, nine-tool discovery, private read call, and fresh-process credential reuse passed |
-| Kimi Code CLI 1.9.0 | Native MCP OAuth and nine-tool discovery passed; `plugins@1.3.4` installs to an inactive plugin path, so use the native fallback below |
+| Kimi Code CLI 1.9.0 | `plugins@1.3.4` native-store registration now passes; native MCP OAuth and nine-tool discovery pass separately, while combined agent-runtime verification remains pending |
 | Cursor Agent 2026.08.31 | Native marketplace install and runtime `needsAuth` detection passed; OAuth remains pending because the test machine has no Cursor IDE |
 | Claude Code 2.1.229 | Native HTTP MCP registration passed; OAuth/tool execution remains pending because the installed CLI's account/network probe did not complete |
 

@@ -20,10 +20,18 @@
     "node": ">=18"
   },
   "files": [
+    ".agents/plugins/marketplace.json",
+    ".claude-plugin/",
+    ".codex-plugin/",
+    ".cursor-plugin/",
+    ".kimi-plugin/",
     ".plugin/",
     ".mcp.json",
+    "agents/",
     "plugin.json",
     "mcp.json",
+    "kimi.plugin.json",
+    "SKILL.md",
     "skills/",
     "contracts/",
     "compatibility/",

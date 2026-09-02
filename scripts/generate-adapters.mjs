@@ -34,6 +34,7 @@ const remoteServer = {
   type: "http",
   url: mcp.mcpServers.citeanything.url,
 };
+const remoteServers = { citeanything: remoteServer };
 const interfaceMetadata = {
   displayName: "CiteAnything",
   shortDescription: "Turn inspected evidence into replayable citations",
@@ -53,9 +54,28 @@ const interfaceMetadata = {
   brandColor: "#10B981",
 };
 
-await write(".plugin/plugin.json", formatJson(manifest));
-await write(".mcp.json", formatJson(mcp));
+await write(
+  ".plugin/plugin.json",
+  formatJson({
+    ...metadata,
+    skills: "./skills/",
+    mcpServers: "./agents/open-plugin/.mcp.json",
+  }),
+);
+await write(".mcp.json", formatJson({ mcpServers: remoteServers }));
 await write("SKILL.md", skill);
+await write(
+  "agents/open-plugin/.mcp.json",
+  formatJson({ mcpServers: remoteServers }),
+);
+await write(
+  "agents/claude/.mcp.json",
+  formatJson({ mcpServers: remoteServers }),
+);
+await write(
+  "agents/cursor/mcp.json",
+  formatJson(remoteServers),
+);
 await write(
   "contracts/tools.sha256",
   `${createHash("sha256").update(contract).digest("hex")}  tools.json\n`,
@@ -66,7 +86,7 @@ await write(
   formatJson({
     ...metadata,
     skills: "./skills/",
-    mcpServers: { citeanything: remoteServer },
+    mcpServers: "./.mcp.json",
     interface: interfaceMetadata,
   }),
 );
@@ -75,7 +95,7 @@ await write(
   formatJson({
     ...metadata,
     skills: "./skills/",
-    mcpServers: { citeanything: remoteServer },
+    mcpServers: "./agents/claude/.mcp.json",
   }),
 );
 await write(
@@ -83,7 +103,7 @@ await write(
   formatJson({
     ...metadata,
     skills: "./skills/",
-    mcpServers: "./mcp.json",
+    mcpServers: "./agents/cursor/mcp.json",
   }),
 );
 await write(
@@ -91,7 +111,7 @@ await write(
   formatJson({
     ...metadata,
     skills: "./skills/",
-    mcpServers: mcp.mcpServers,
+    mcpServers: remoteServers,
     interface: {
       displayName: interfaceMetadata.displayName,
       shortDescription: interfaceMetadata.shortDescription,
@@ -104,7 +124,7 @@ await write(
 await write("kimi.plugin.json", formatJson({
   ...metadata,
   skills: "./skills/",
-  mcpServers: mcp.mcpServers,
+  mcpServers: remoteServers,
   interface: {
     displayName: interfaceMetadata.displayName,
     shortDescription: interfaceMetadata.shortDescription,

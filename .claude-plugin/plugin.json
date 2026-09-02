@@ -17,10 +17,5 @@
     "mcp"
   ],
   "skills": "./skills/",
-  "mcpServers": {
-    "citeanything": {
-      "type": "http",
-      "url": "https://citeanything.app/mcp"
-    }
-  }
+  "mcpServers": "./agents/claude/.mcp.json"
 }

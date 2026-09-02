@@ -39,6 +39,8 @@
 - [x] 4. Generate and verify host adapters
   - Generate Codex, Claude Code, Cursor, and Kimi metadata from the canonical manifest, Skill, MCP
     URL, tool contract version, and package version.
+  - Keep the schema-bearing Agent Plugins `mcp.json` distinct from `.mcp.json` and per-host MCP
+    files, and generate the Open Plugin, Codex, Claude Code, Cursor, and Kimi shapes deterministically.
   - Remove duplicated credential prompts from adapters on the remote OAuth path.
   - Make generation deterministic and make CI fail when committed adapters drift.
   - Mark a host Skill-only or legacy-stdio-only when its tested version cannot complete remote MCP
@@ -187,6 +189,9 @@
   - Where a host does not support remote MCP OAuth, label the result accurately, retain its documented
     fallback, and exclude it from the full-support list until resolved.
   - Confirm installer target selection does not mutate non-target hosts.
+  - Require the generic Codex installer path to complete native plugin installation; writing
+    marketplace/config entries while `codex plugin list` reports `not installed` remains an
+    upstream blocker, not a passing activation result.
   - Save a dated compatibility matrix and redact all account identifiers and tokens from evidence.
   - _Requirements: R1, R4, R5, R6, R8_
 
