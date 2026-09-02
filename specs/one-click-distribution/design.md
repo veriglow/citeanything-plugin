@@ -323,12 +323,14 @@ installation compatibility or marketplace presence.
 | Host | Preferred installation | Runtime | Adapter policy |
 | --- | --- | --- | --- |
 | Codex app/CLI | Verified native marketplace one-liner; `npx plugins add` remains a candidate | Remote MCP OAuth | Generated manifest if native format requires one |
-| Claude Code | Native HTTP MCP fallback; plugin/OAuth verification pending | Remote MCP OAuth | Generated `.claude-plugin` metadata only |
+| Claude Code | Native marketplace one-liner installs one Skill and one MCP; OAuth verification pending | Remote MCP OAuth | Generated `.claude-plugin` metadata and host-compatible MCP file |
 | Cursor | Native marketplace install; OAuth verification pending | Remote MCP OAuth | Generated `.cursor-plugin` metadata only |
-| Kimi Code CLI | Managed plugin-store registration passes; combined agent-runtime verification pending; native MCP fallback verified | Remote MCP OAuth | Generated inline HTTP adapter; retain the native fallback until the complete runtime path passes |
+| Kimi Code CLI | `plugins@1.3.4 --target kimi` installs to the managed store; combined agent-runtime verification pending; native MCP fallback verified | Remote MCP OAuth | Generated inline HTTP adapter; retain the native fallback until the complete runtime path passes |
 
 The installer discovery gate is authoritative: success requires it to report both the Skill and MCP
 server. A host that can install only the Skill is labeled “Skill-only,” not “Plugin installed.”
+Installation commands may differ by host. The product contract standardizes the resulting Skill,
+MCP endpoint, tools, and authentication semantics rather than requiring one universal installer.
 
 Because host capabilities change independently, the compatibility matrix is generated from tested
 versions and includes the test date. Unsupported behavior is not papered over with shell setup.

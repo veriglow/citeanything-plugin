@@ -193,6 +193,9 @@
     marketplace/config entries while `codex plugin list` reports `not installed` remains an
     upstream blocker, not a passing activation result.
   - Save a dated compatibility matrix and redact all account identifiers and tokens from evidence.
+  - Verified so far: Codex native package/OAuth/read path; Claude native one-Skill/one-MCP package
+    inventory; Kimi managed-store package registration; Cursor marketplace index/install detection.
+    Retain the narrower runtime statuses until each remaining lifecycle gate passes.
   - _Requirements: R1, R4, R5, R6, R8_
 
 - [ ] 16. Release v0.2.0 only after every advertised gate passes

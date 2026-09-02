@@ -39,6 +39,8 @@ confirm the installation.
 
 - Codex shall install the public GitHub plugin with one shell line using its native marketplace and
   plugin commands, yielding one Skill and one MCP server.
+- Each host may use its own native or verified adapter command; a universal cross-host command is
+  not a release requirement.
 - When a user runs `npx plugins add veriglow/citeanything-plugin`, the portable installer shall
   discover one CiteAnything package containing at least one Skill and one MCP server.
 - When supported agents are detected, the installer shall offer or perform installation through
