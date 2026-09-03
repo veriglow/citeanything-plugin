@@ -36,6 +36,10 @@ const remoteServer = {
 };
 const remoteServers = { citeanything: remoteServer };
 const logoPath = "assets/citeanything-logo.svg";
+const cursorAuthor = {
+  name: manifest.author.name,
+  email: "feedback@citeanything.app",
+};
 const interfaceMetadata = {
   displayName: "CiteAnything",
   shortDescription: "Turn inspected evidence into replayable citations",
@@ -104,6 +108,8 @@ await write(
   ".cursor-plugin/plugin.json",
   formatJson({
     ...metadata,
+    displayName: interfaceMetadata.displayName,
+    author: cursorAuthor,
     logo: logoPath,
     skills: "./skills/",
     mcpServers: "./agents/cursor/mcp.json",
@@ -150,6 +156,11 @@ const marketplaceEntry = {
   category: "Productivity",
   tags: ["citations", "evidence", "research", "mcp"],
 };
+const cursorMarketplaceEntry = {
+  ...marketplaceEntry,
+  displayName: interfaceMetadata.displayName,
+  author: cursorAuthor,
+};
 await write(
   ".claude-plugin/marketplace.json",
   formatJson({
@@ -167,7 +178,7 @@ await write(
       description: "CiteAnything plugins for verifiable AI-generated research",
       version: manifest.version,
     },
-    plugins: [marketplaceEntry],
+    plugins: [cursorMarketplaceEntry],
   }),
 );
 await write(

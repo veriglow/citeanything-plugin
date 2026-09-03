@@ -132,11 +132,13 @@ const kimiAdapter = await readJson(".kimi-plugin/plugin.json");
 assert.equal(codexAdapter.mcpServers, "./.mcp.json");
 assert.equal(claudeAdapter.mcpServers, "./agents/claude/.mcp.json");
 assert.equal(cursorAdapter.mcpServers, "./agents/cursor/mcp.json");
+assert.equal(cursorAdapter.displayName, "CiteAnything");
 assert.equal(cursorAdapter.logo, logoPath);
 assert.equal(codexAdapter.interface.logo, `./${logoPath}`);
 assert.deepEqual(kimiAdapter.mcpServers, { citeanything: httpServer });
 
 const cursorMarketplace = await readJson(".cursor-plugin/marketplace.json");
+assert.equal(cursorMarketplace.plugins[0].displayName, "CiteAnything");
 assert.equal(cursorMarketplace.plugins[0].logo, logoPath);
 
 console.log(

@@ -15,7 +15,7 @@
       "version": "0.2.1",
       "author": {
         "name": "VeriGlow",
-        "url": "https://citeanything.app"
+        "email": "feedback@citeanything.app"
       },
       "homepage": "https://citeanything.app/plugin",
       "repository": "https://github.com/veriglow/citeanything-plugin",
@@ -27,7 +27,8 @@
         "evidence",
         "research",
         "mcp"
-      ]
+      ],
+      "displayName": "CiteAnything"
     }
   ]
 }

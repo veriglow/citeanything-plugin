@@ -4,7 +4,7 @@
   "description": "Create replayable evidence citations and cite private knowledge-base documents from AI agents.",
   "author": {
     "name": "VeriGlow",
-    "url": "https://citeanything.app"
+    "email": "feedback@citeanything.app"
   },
   "homepage": "https://citeanything.app/plugin",
   "repository": "https://github.com/veriglow/citeanything-plugin",
@@ -16,6 +16,7 @@
     "knowledge-base",
     "mcp"
   ],
+  "displayName": "CiteAnything",
   "logo": "assets/citeanything-logo.svg",
   "skills": "./skills/",
   "mcpServers": "./agents/cursor/mcp.json"

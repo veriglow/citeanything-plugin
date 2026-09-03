@@ -100,11 +100,11 @@ The package includes generated adapters for Codex, Claude Code, Cursor, and Kimi
 discovery finds both the Skill and remote MCP contribution, but current installers do not activate
 every host the same way.
 
-| Host tested 2026-09-02 | Result |
+| Host tested through 2026-09-03 | Result |
 | --- | --- |
 | Codex CLI 0.152.0 | Native public-marketplace install, browser OAuth, nine-tool discovery, private read call, and fresh-process credential reuse passed |
 | Kimi Code CLI 1.9.0 | `plugins@1.3.4` native-store registration now passes; native MCP OAuth and nine-tool discovery pass separately, while combined agent-runtime verification remains pending |
-| Cursor Agent 2026.08.31 | Native marketplace install and runtime `needsAuth` detection passed; OAuth remains pending because the test machine has no Cursor IDE |
+| Cursor App 3.18.25 / Agent 2026.08.31 | Native personal-marketplace install, browser OAuth, and nine-tool discovery passed; authenticated tool execution and the remaining lifecycle checks are pending |
 | Claude Code 2.1.229 | Native marketplace install passed with one Skill and one namespaced MCP server; OAuth/tool execution remains pending |
 
 The detailed, redacted evidence is in
@@ -130,7 +130,7 @@ These are fallbacks for hosts that cannot install a complete Agent Plugin:
   The client must support MCP OAuth discovery and PKCE.
 - **Claude Code 2.1.229 MCP fallback:** `claude mcp add --scope user --transport http citeanything https://citeanything.app/mcp`
 - **Kimi Code CLI 1.9.0:** `kimi mcp add --transport http --auth oauth citeanything https://citeanything.app/mcp`, then `kimi mcp auth citeanything`
-- **Cursor Agent 2026.08.31:** run `agent plugin marketplace add https://github.com/veriglow/citeanything-plugin.git`, then open `/plugin`, paste the repository URL, and install for your user. Authenticate the detected MCP server in Cursor's MCP settings.
+- **Cursor App 3.18.25 / Agent 2026.08.31:** run `agent plugin marketplace add https://github.com/veriglow/citeanything-plugin.git`, then choose **Customize → Add → From Marketplace** and install CiteAnything for your user. Authenticate the detected MCP server when Cursor prompts you.
 - **Portable installer candidate:** `npx plugins add veriglow/citeanything-plugin`; verify activation
   in the host's native plugin and MCP views after installation.
 - **Legacy stdio:** run the compatibility server in [`compatibility/stdio`](compatibility/stdio) with
