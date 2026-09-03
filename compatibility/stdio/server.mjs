@@ -7,7 +7,7 @@ import { basename } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const SERVER_NAME = "citeanything";
-const SERVER_VERSION = "0.2.3";
+const SERVER_VERSION = "0.2.4";
 const DEFAULT_BASE_URL = "https://citeanything.app";
 const MAX_PDF_BYTES = 100 * 1024 * 1024;
 

@@ -139,6 +139,7 @@ assert.equal(codexAdapter.interface.logo, `./${logoPath}`);
 assert.deepEqual(kimiAdapter.mcpServers, { citeanything: httpServer });
 
 const cursorMarketplace = await readJson(".cursor-plugin/marketplace.json");
+assert.equal(cursorMarketplace.name, "veriglow-citeanything-plugin");
 assert.deepEqual(cursorMarketplace.owner, {
   name: "VeriGlow",
   email: "feedback@citeanything.app",

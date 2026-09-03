@@ -174,7 +174,7 @@ await write(
 await write(
   ".cursor-plugin/marketplace.json",
   formatJson({
-    name: "citeanything",
+    name: "veriglow-citeanything-plugin",
     owner: { name: "VeriGlow", email: "feedback@citeanything.app" },
     metadata: {
       description: "CiteAnything plugins for verifiable AI-generated research",

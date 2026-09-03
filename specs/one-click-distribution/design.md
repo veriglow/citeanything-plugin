@@ -102,6 +102,11 @@ canonical artwork without falling back to a cached website favicon. Hosts must n
 identity from a third-party favicon service because those caches can continue serving obsolete brand
 artwork after the origin asset changes.
 
+The Cursor marketplace manifest uses the stable registration name
+`veriglow-citeanything-plugin`. This must match the marketplace identity already registered by the
+GitHub-repository installation path; changing it to the shorter plugin name causes Cursor refreshes
+to reject the replacement entry even when the plugin itself parses successfully.
+
 `plugin.json`, `mcp.json`, and `skills/` occupy the standard root locations required by Agent
 Plugins 1.0. Generated compatibility adapters translate those canonical sources into each host's
 accepted syntax rather than becoming independent sources of truth.

@@ -1,19 +1,19 @@
 {
-  "name": "citeanything",
+  "name": "veriglow-citeanything-plugin",
   "owner": {
     "name": "VeriGlow",
     "email": "feedback@citeanything.app"
   },
   "metadata": {
     "description": "CiteAnything plugins for verifiable AI-generated research",
-    "version": "0.2.3"
+    "version": "0.2.4"
   },
   "plugins": [
     {
       "name": "citeanything",
       "source": ".",
       "description": "Create replayable evidence citations and cite private knowledge-base documents from AI agents.",
-      "version": "0.2.3",
+      "version": "0.2.4",
       "author": {
         "name": "VeriGlow",
         "email": "feedback@citeanything.app"
