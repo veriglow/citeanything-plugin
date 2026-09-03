@@ -165,7 +165,7 @@ await write(
   ".claude-plugin/marketplace.json",
   formatJson({
     name: "citeanything",
-    owner: { name: "VeriGlow" },
+    owner: { name: "VeriGlow", email: "feedback@citeanything.app" },
     plugins: [{ ...marketplaceEntry, strict: true }],
   }),
 );
@@ -173,7 +173,7 @@ await write(
   ".cursor-plugin/marketplace.json",
   formatJson({
     name: "citeanything",
-    owner: { name: "VeriGlow" },
+    owner: { name: "VeriGlow", email: "feedback@citeanything.app" },
     metadata: {
       description: "CiteAnything plugins for verifiable AI-generated research",
       version: manifest.version,

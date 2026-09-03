@@ -1,7 +1,8 @@
 {
   "name": "citeanything",
   "owner": {
-    "name": "VeriGlow"
+    "name": "VeriGlow",
+    "email": "feedback@citeanything.app"
   },
   "plugins": [
     {
