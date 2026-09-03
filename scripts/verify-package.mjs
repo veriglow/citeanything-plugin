@@ -18,7 +18,6 @@ const contractText = await readText("contracts/tools.json");
 const contract = JSON.parse(contractText);
 const packageJson = await readJson("package.json");
 const logoPath = "assets/citeanything-logo.svg";
-const cursorLogoUrl = "https://brand.veri-glow.com/favicon.svg";
 const logo = await readText(logoPath);
 
 assert.deepEqual(manifestMirror, {
@@ -134,7 +133,7 @@ assert.equal(codexAdapter.mcpServers, "./.mcp.json");
 assert.equal(claudeAdapter.mcpServers, "./agents/claude/.mcp.json");
 assert.equal(cursorAdapter.mcpServers, "./agents/cursor/mcp.json");
 assert.equal(cursorAdapter.displayName, "CiteAnything");
-assert.equal(cursorAdapter.logo, cursorLogoUrl);
+assert.equal(cursorAdapter.logo, logoPath);
 assert.equal(codexAdapter.interface.logo, `./${logoPath}`);
 assert.deepEqual(kimiAdapter.mcpServers, { citeanything: httpServer });
 
@@ -145,7 +144,7 @@ assert.deepEqual(cursorMarketplace.owner, {
   email: "feedback@citeanything.app",
 });
 assert.equal(cursorMarketplace.plugins[0].displayName, "CiteAnything");
-assert.equal(cursorMarketplace.plugins[0].logo, cursorLogoUrl);
+assert.equal(cursorMarketplace.plugins[0].logo, logoPath);
 
 console.log(
   `Verified CiteAnything Agent Plugin ${manifest.version}: ${contract.tools.length} tools, contract sha256 ${expectedHash.slice(0, 12)}…`,

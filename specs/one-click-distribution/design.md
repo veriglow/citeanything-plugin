@@ -93,14 +93,15 @@ citeanything-plugin/
 └── package.json
 ```
 
-The package owns a versioned copy of the canonical CiteAnything SVG and declares it explicitly in
-Codex interface metadata. The Cursor plugin manifest and Cursor marketplace entry instead declare
-the canonical first-party URL `https://brand.veri-glow.com/favicon.svg`. Cursor rewrites relative
-plugin-logo paths to GitHub raw-content URLs and its MCP view fetches that resolved URL separately;
-using the first-party absolute URL keeps the plugin and its plugin-managed MCP server on the same
-canonical artwork without falling back to a cached website favicon. Hosts must not infer the plugin
-identity from a third-party favicon service because those caches can continue serving obsolete brand
-artwork after the origin asset changes.
+The package owns a versioned copy of the canonical CiteAnything SVG and declares that file explicitly
+in Codex and Cursor metadata. Cursor's installed-plugin loader requires a repository-relative logo so
+it can resolve the image to a local file URL. Its marketplace index resolves the same path against the
+exact Git commit and its MCP view fetches that immutable raw-content URL. Keeping both Cursor entries
+on `assets/citeanything-logo.svg` therefore gives the plugin card and plugin-managed MCP server the
+same versioned artwork. The generated verifier prevents either Cursor entry from drifting to an
+external favicon or mobile-app asset. Hosts must not infer the plugin identity from a third-party
+favicon service because those caches can continue serving obsolete brand artwork after the origin
+asset changes.
 
 The Cursor marketplace manifest uses the stable registration name
 `veriglow-citeanything-plugin`. This must match the marketplace identity already registered by the
