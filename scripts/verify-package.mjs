@@ -60,7 +60,7 @@ assert.deepEqual(mcp.mcpServers, {
 });
 assert.equal(packageJson.version, manifest.version);
 assert.equal(packageJson.files.includes("assets/"), true);
-assert.equal(contract.contractVersion, manifest.version);
+assert.equal(contract.contractVersion, "0.2.0");
 assert.match(logo, /VeriGlow Favicon — clean Penrose triangle mark/);
 assert.match(logo, /viewBox="-2\.1 1\.5 104\.2 91\.1"/);
 

@@ -1,6 +1,6 @@
 {
   "name": "@veriglow/citeanything-plugin",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "CiteAnything Agent Skill and MCP server",
   "type": "module",
   "license": "MIT",
