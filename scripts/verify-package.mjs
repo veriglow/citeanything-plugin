@@ -143,8 +143,11 @@ assert.deepEqual(cursorMarketplace.owner, {
   name: "VeriGlow",
   email: "feedback@citeanything.app",
 });
-assert.equal(cursorMarketplace.plugins[0].displayName, "CiteAnything");
-assert.equal(cursorMarketplace.plugins[0].logo, logoPath);
+assert.deepEqual(cursorMarketplace.plugins[0], {
+  name: manifest.name,
+  source: ".",
+  description: manifest.description,
+});
 
 console.log(
   `Verified CiteAnything Agent Plugin ${manifest.version}: ${contract.tools.length} tools, contract sha256 ${expectedHash.slice(0, 12)}…`,

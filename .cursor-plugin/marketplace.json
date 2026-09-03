@@ -6,30 +6,13 @@
   },
   "metadata": {
     "description": "CiteAnything plugins for verifiable AI-generated research",
-    "version": "0.2.5"
+    "version": "0.2.6"
   },
   "plugins": [
     {
       "name": "citeanything",
       "source": ".",
-      "description": "Create replayable evidence citations and cite private knowledge-base documents from AI agents.",
-      "version": "0.2.5",
-      "author": {
-        "name": "VeriGlow",
-        "email": "feedback@citeanything.app"
-      },
-      "homepage": "https://citeanything.app/plugin",
-      "repository": "https://github.com/veriglow/citeanything-plugin",
-      "license": "MIT",
-      "logo": "assets/citeanything-logo.svg",
-      "category": "Productivity",
-      "tags": [
-        "citations",
-        "evidence",
-        "research",
-        "mcp"
-      ],
-      "displayName": "CiteAnything"
+      "description": "Create replayable evidence citations and cite private knowledge-base documents from AI agents."
     }
   ]
 }

@@ -157,10 +157,9 @@ const marketplaceEntry = {
   tags: ["citations", "evidence", "research", "mcp"],
 };
 const cursorMarketplaceEntry = {
-  ...marketplaceEntry,
-  displayName: interfaceMetadata.displayName,
-  author: cursorAuthor,
-  logo: logoPath,
+  name: manifest.name,
+  source: ".",
+  description: manifest.description,
 };
 await write(
   ".claude-plugin/marketplace.json",
