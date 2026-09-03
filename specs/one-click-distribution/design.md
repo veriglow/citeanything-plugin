@@ -96,12 +96,19 @@ citeanything-plugin/
 The package owns a versioned copy of the canonical CiteAnything SVG and declares that file explicitly
 in Codex and Cursor metadata. Cursor's installed-plugin loader requires a repository-relative logo so
 it can resolve the image to a local file URL. Its marketplace index resolves the same path against the
-exact Git commit and its MCP view fetches that immutable raw-content URL. Keeping both Cursor entries
-on `assets/citeanything-logo.svg` therefore gives the plugin card and plugin-managed MCP server the
-same versioned artwork. The generated verifier prevents either Cursor entry from drifting to an
-external favicon or mobile-app asset. Hosts must not infer the plugin identity from a third-party
+exact Git commit and its MCP view fetches that immutable raw-content URL. Both Cursor entries therefore
+use `assets/citeanything-logo.svg`, and the generated verifier prevents either entry from drifting to
+an external favicon or mobile-app asset. Hosts must not infer the plugin identity from a third-party
 favicon service because those caches can continue serving obsolete brand artwork after the origin
 asset changes.
+
+Cursor App 3.18.25 has a personal-marketplace display limitation: after installation, the Customize
+detail page prefers the backend installed-plugin record over the parsed GitHub marketplace record and
+merges only installation scopes, not `logoUrl`. The detail header consequently shows Cursor's generic
+fallback even though the same installation resolves the canonical SVG for its MCP server. This cannot
+be repaired with an additional manifest field; the package already uses Cursor's supported `logo`
+field. Official marketplace publication or a Cursor client fix must preserve or merge that field into
+the installed-plugin record.
 
 The Cursor marketplace manifest uses the stable registration name
 `veriglow-citeanything-plugin`. This must match the marketplace identity already registered by the
@@ -341,7 +348,7 @@ installation compatibility or marketplace presence.
 | --- | --- | --- | --- |
 | Codex app/CLI | Verified native marketplace one-liner; `npx plugins add` remains a candidate | Remote MCP OAuth | Generated manifest if native format requires one |
 | Claude Code | Native marketplace one-liner installs one Skill and one MCP; OAuth verification pending | Remote MCP OAuth | Generated `.claude-plugin` metadata and host-compatible MCP file |
-| Cursor | Native marketplace install; OAuth verification pending | Remote MCP OAuth | Generated `.cursor-plugin` metadata only |
+| Cursor | Native personal-marketplace install; OAuth verification pending; 3.18.25 detail header has a logo fallback bug | Remote MCP OAuth | Generated `.cursor-plugin` metadata only; official marketplace publication pending |
 | Kimi Code CLI | `plugins@1.3.4 --target kimi` installs to the managed store; combined agent-runtime verification pending; native MCP fallback verified | Remote MCP OAuth | Generated inline HTTP adapter; retain the native fallback until the complete runtime path passes |
 
 The installer discovery gate is authoritative: success requires it to report both the Skill and MCP

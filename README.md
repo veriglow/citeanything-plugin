@@ -104,7 +104,7 @@ every host the same way.
 | --- | --- |
 | Codex CLI 0.152.0 | Native public-marketplace install, browser OAuth, nine-tool discovery, private read call, and fresh-process credential reuse passed |
 | Kimi Code CLI 1.9.0 | `plugins@1.3.4` native-store registration now passes; native MCP OAuth and nine-tool discovery pass separately, while combined agent-runtime verification remains pending |
-| Cursor App 3.18.25 / Agent 2026.08.31 | Native personal-marketplace install, browser OAuth, and nine-tool discovery passed; authenticated tool execution and the remaining lifecycle checks are pending |
+| Cursor App 3.18.25 / Agent 2026.08.31 | Native personal-marketplace install, browser OAuth, and nine-tool discovery passed; MCP logo resolves correctly, while the installed-plugin detail header falls back because Cursor drops `logoUrl` when merging personal-marketplace records; authenticated tool execution and the remaining lifecycle checks are pending |
 | Claude Code 2.1.229 | Native marketplace install passed with one Skill and one namespaced MCP server; OAuth/tool execution remains pending |
 
 The detailed, redacted evidence is in
