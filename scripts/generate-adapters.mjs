@@ -36,6 +36,7 @@ const remoteServer = {
 };
 const remoteServers = { citeanything: remoteServer };
 const logoPath = "assets/citeanything-logo.svg";
+const cursorLogoUrl = "https://brand.veri-glow.com/favicon.svg";
 const cursorAuthor = {
   name: manifest.author.name,
   email: "feedback@citeanything.app",
@@ -110,7 +111,7 @@ await write(
     ...metadata,
     displayName: interfaceMetadata.displayName,
     author: cursorAuthor,
-    logo: logoPath,
+    logo: cursorLogoUrl,
     skills: "./skills/",
     mcpServers: "./agents/cursor/mcp.json",
   }),
@@ -160,6 +161,7 @@ const cursorMarketplaceEntry = {
   ...marketplaceEntry,
   displayName: interfaceMetadata.displayName,
   author: cursorAuthor,
+  logo: cursorLogoUrl,
 };
 await write(
   ".claude-plugin/marketplace.json",

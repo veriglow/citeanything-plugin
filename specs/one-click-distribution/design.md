@@ -94,9 +94,13 @@ citeanything-plugin/
 ```
 
 The package owns a versioned copy of the canonical CiteAnything SVG and declares it explicitly in
-the Cursor plugin manifest, Cursor marketplace entry, and Codex interface metadata. Hosts must not
-infer the plugin identity from a website favicon service because third-party favicon caches can
-continue serving obsolete brand artwork after the origin asset changes.
+Codex interface metadata. The Cursor plugin manifest and Cursor marketplace entry instead declare
+the canonical first-party URL `https://brand.veri-glow.com/favicon.svg`. Cursor rewrites relative
+plugin-logo paths to GitHub raw-content URLs and its MCP view fetches that resolved URL separately;
+using the first-party absolute URL keeps the plugin and its plugin-managed MCP server on the same
+canonical artwork without falling back to a cached website favicon. Hosts must not infer the plugin
+identity from a third-party favicon service because those caches can continue serving obsolete brand
+artwork after the origin asset changes.
 
 `plugin.json`, `mcp.json`, and `skills/` occupy the standard root locations required by Agent
 Plugins 1.0. Generated compatibility adapters translate those canonical sources into each host's

@@ -1,6 +1,6 @@
 {
   "name": "citeanything",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "Create replayable evidence citations and cite private knowledge-base documents from AI agents.",
   "author": {
     "name": "VeriGlow",
@@ -17,7 +17,7 @@
     "mcp"
   ],
   "displayName": "CiteAnything",
-  "logo": "assets/citeanything-logo.svg",
+  "logo": "https://brand.veri-glow.com/favicon.svg",
   "skills": "./skills/",
   "mcpServers": "./agents/cursor/mcp.json"
 }
