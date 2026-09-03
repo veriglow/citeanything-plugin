@@ -17,6 +17,8 @@ const mcpMirror = await readJson(".mcp.json");
 const contractText = await readText("contracts/tools.json");
 const contract = JSON.parse(contractText);
 const packageJson = await readJson("package.json");
+const logoPath = "assets/citeanything-logo.svg";
+const logo = await readText(logoPath);
 
 assert.deepEqual(manifestMirror, {
   name: manifest.name,
@@ -57,7 +59,10 @@ assert.deepEqual(mcp.mcpServers, {
   },
 });
 assert.equal(packageJson.version, manifest.version);
+assert.equal(packageJson.files.includes("assets/"), true);
 assert.equal(contract.contractVersion, manifest.version);
+assert.match(logo, /VeriGlow Favicon — clean Penrose triangle mark/);
+assert.match(logo, /viewBox="-2\.1 1\.5 104\.2 91\.1"/);
 
 const expectedTools = [
   ["create_citations", "citation:write"],
@@ -127,7 +132,12 @@ const kimiAdapter = await readJson(".kimi-plugin/plugin.json");
 assert.equal(codexAdapter.mcpServers, "./.mcp.json");
 assert.equal(claudeAdapter.mcpServers, "./agents/claude/.mcp.json");
 assert.equal(cursorAdapter.mcpServers, "./agents/cursor/mcp.json");
+assert.equal(cursorAdapter.logo, logoPath);
+assert.equal(codexAdapter.interface.logo, `./${logoPath}`);
 assert.deepEqual(kimiAdapter.mcpServers, { citeanything: httpServer });
+
+const cursorMarketplace = await readJson(".cursor-plugin/marketplace.json");
+assert.equal(cursorMarketplace.plugins[0].logo, logoPath);
 
 console.log(
   `Verified CiteAnything Agent Plugin ${manifest.version}: ${contract.tools.length} tools, contract sha256 ${expectedHash.slice(0, 12)}…`,

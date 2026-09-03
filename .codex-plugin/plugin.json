@@ -36,6 +36,7 @@
       "Create replayable citations for the evidence I inspected",
       "Search my CiteAnything knowledge base and cite exact evidence"
     ],
-    "brandColor": "#10B981"
+    "brandColor": "#10B981",
+    "logo": "./assets/citeanything-logo.svg"
   }
 }

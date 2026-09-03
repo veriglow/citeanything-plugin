@@ -35,6 +35,7 @@ const remoteServer = {
   url: mcp.mcpServers.citeanything.url,
 };
 const remoteServers = { citeanything: remoteServer };
+const logoPath = "assets/citeanything-logo.svg";
 const interfaceMetadata = {
   displayName: "CiteAnything",
   shortDescription: "Turn inspected evidence into replayable citations",
@@ -52,6 +53,7 @@ const interfaceMetadata = {
     "Search my CiteAnything knowledge base and cite exact evidence",
   ],
   brandColor: "#10B981",
+  logo: `./${logoPath}`,
 };
 
 await write(
@@ -102,6 +104,7 @@ await write(
   ".cursor-plugin/plugin.json",
   formatJson({
     ...metadata,
+    logo: logoPath,
     skills: "./skills/",
     mcpServers: "./agents/cursor/mcp.json",
   }),
@@ -143,6 +146,7 @@ const marketplaceEntry = {
   homepage: manifest.homepage,
   repository: manifest.repository,
   license: manifest.license,
+  logo: logoPath,
   category: "Productivity",
   tags: ["citations", "evidence", "research", "mcp"],
 };

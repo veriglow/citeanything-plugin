@@ -16,6 +16,7 @@
       "homepage": "https://citeanything.app/plugin",
       "repository": "https://github.com/veriglow/citeanything-plugin",
       "license": "MIT",
+      "logo": "assets/citeanything-logo.svg",
       "category": "Productivity",
       "tags": [
         "citations",

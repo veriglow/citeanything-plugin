@@ -28,6 +28,7 @@
     ".plugin/",
     ".mcp.json",
     "agents/",
+    "assets/",
     "plugin.json",
     "mcp.json",
     "kimi.plugin.json",

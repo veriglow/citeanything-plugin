@@ -16,6 +16,7 @@
     "knowledge-base",
     "mcp"
   ],
+  "logo": "assets/citeanything-logo.svg",
   "skills": "./skills/",
   "mcpServers": "./agents/cursor/mcp.json"
 }

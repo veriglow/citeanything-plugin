@@ -79,6 +79,8 @@ citeanything-plugin/
 │   ├── open-plugin/.mcp.json
 │   ├── claude/.mcp.json
 │   └── cursor/mcp.json
+├── assets/
+│   └── citeanything-logo.svg
 ├── compatibility/
 │   └── stdio/
 │       └── server.mjs
@@ -90,6 +92,11 @@ citeanything-plugin/
 ├── LICENSE
 └── package.json
 ```
+
+The package owns a versioned copy of the canonical CiteAnything SVG and declares it explicitly in
+the Cursor plugin manifest, Cursor marketplace entry, and Codex interface metadata. Hosts must not
+infer the plugin identity from a website favicon service because third-party favicon caches can
+continue serving obsolete brand artwork after the origin asset changes.
 
 `plugin.json`, `mcp.json`, and `skills/` occupy the standard root locations required by Agent
 Plugins 1.0. Generated compatibility adapters translate those canonical sources into each host's
