@@ -24,7 +24,7 @@ test("publishes the agreed public tool profile without general web tools", () =>
     ],
   );
   assert.equal(TOOLS.some((tool) => ["search_web", "fetch_url", "open", "click", "find"].includes(tool.name)), false);
-  assert.equal(TOOL_CONTRACT.contractVersion, "0.2.0");
+  assert.equal(TOOL_CONTRACT.contractVersion, "0.2.1");
   assert.deepEqual(
     Object.keys(TOOL_SCOPES).sort(),
     TOOLS.map((tool) => tool.name).sort(),

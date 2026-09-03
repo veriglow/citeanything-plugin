@@ -1,6 +1,6 @@
 {
   "name": "citeanything",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Create replayable evidence citations and cite private knowledge-base documents from AI agents.",
   "author": {
     "name": "VeriGlow",

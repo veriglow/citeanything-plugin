@@ -385,9 +385,10 @@ branch snapshot.
 
 ## Versioning and Release
 
-This work is a backward-compatible capability and packaging expansion, so the next candidate is
-`v0.2.0`, not `v1.0.0`. Version 1.0 should be reserved for a stable public contract after multiple
-host interoperability runs.
+This work is a backward-compatible capability and packaging expansion. The first public v0.2
+package was indexed as `v0.2.0`; subsequent packaging corrections, including an explicitly bundled
+canonical logo, use patch releases beginning with `v0.2.1`. Version 1.0 remains reserved for a
+stable public contract after multiple host interoperability runs.
 
 Release sequence:
 
@@ -396,7 +397,7 @@ Release sequence:
 3. run OAuth and tool contract tests against staging;
 4. publish a plugin release candidate tag and test clean installs;
 5. enable production MCP OAuth;
-6. tag `v0.2.0`, publish the discovery page, and update marketplace entries;
+6. tag the current v0.2 patch release, publish the discovery page, and update marketplace entries;
 7. verify the exact released Git tag through every locally testable host.
 
 Rollback disables new authorizations and MCP routing while leaving existing REST, CLI, and Skill Key
@@ -534,5 +535,5 @@ Approval of this design confirms the following product choices:
 3. v0.2 requests all five least-privilege capability scopes at install-time authorization;
 4. `citeanything.app` is the v0.2 canonical issuer/resource, while `.cn` keeps a documented
    compatibility path pending a separate regional one-click design;
-5. the next release target is `v0.2.0`, with `v1.0.0` deferred until the contract has demonstrated
-   multi-host stability.
+5. releases remain on the current v0.2 patch line, with `v1.0.0` deferred until the contract has
+   demonstrated multi-host stability.

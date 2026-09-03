@@ -198,13 +198,13 @@
     Retain the narrower runtime statuses until each remaining lifecycle gate passes.
   - _Requirements: R1, R4, R5, R6, R8_
 
-- [ ] 16. Release v0.2.0 only after every advertised gate passes
+- [ ] 16. Release the current v0.2 patch only after every advertised gate passes
   - Run Plugin package/contract tests, backend tests, client tests, lint/type/build checks, inventory
     validation, secret scans, and clean-tree adapter regeneration.
   - Review staged files in each repository and exclude unrelated work and sensitive personal files.
   - Commit without `Co-Authored-By`, AI attribution, or generated-by trailers; push the required
     repository and submodule/umbrella revisions in dependency order.
-  - Deploy and enable the international MCP OAuth feature, create the `v0.2.0` Git tag/release, and
+  - Deploy and enable the international MCP OAuth feature, create the current v0.2 patch tag/release, and
     publish matching marketplace/discovery metadata.
   - Repeat discovery and at least one clean end-to-end OAuth read call from the exact released tag.
   - Announce only the hosts that passed complete installation, activation, authorization, and tool
